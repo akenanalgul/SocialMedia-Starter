@@ -16,6 +16,7 @@ const PostShare = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.authReducer.authData);
   const desc = useRef();
+  const serverPublic= process.env.REACT_APP_PUBLIC_FOLDER
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -49,10 +50,11 @@ const PostShare = () => {
       }
     }
     dispatch(uploadPost(newPost));
+    reset()
   };
   return (
     <div className="PostShare">
-      <img src={ProfileImage} alt="" />
+      <img src={user.coverPicture? serverPublic+ user.profilePicture: serverPublic + "defaultProfile.png"} alt="" />
       <div>
         <input
           ref={desc}
